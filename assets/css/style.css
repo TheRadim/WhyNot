@@ -1,0 +1,240 @@
+/*
+  Minimal template inspired by Johansen Skovsted layout
+  - Open Sans typography
+  - Top header (address / nav / language)
+  - Simple pages: Home / Projects / Studio / Contact
+*/
+
+:root
+{
+  --ink: #232323;
+  --muted: rgba(35, 35, 35, 0.65);
+  --rule: rgba(35, 35, 35, 0.12);
+  --paper: #fff;
+
+  --page-max: 1120px;
+  --page-pad-x: 64px;
+  --page-pad-x-m: 18px;
+
+  --top-pad: 26px;
+  --nav-gap: 28px;
+}
+
+*,
+*::before,
+*::after
+{
+  box-sizing: border-box;
+}
+
+html,
+body
+{
+  margin: 0;
+  padding: 0;
+}
+
+body
+{
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Open Sans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  line-height: 2.0em;
+}
+
+.page
+{
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: var(--top-pad) var(--page-pad-x) 80px;
+}
+
+a
+{
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover
+{
+  text-decoration: underline;
+}
+
+hr
+{
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 18px 0;
+}
+
+img
+{
+  max-width: 100%;
+  height: auto;
+}
+
+.topbar
+{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 22px;
+  padding-top: 6px;
+}
+
+.brand
+{
+  margin: 0;
+  line-height: 1.8em;
+  text-transform: lowercase;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.topbar-nav
+{
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex: 1;
+  gap: var(--nav-gap);
+  text-transform: lowercase;
+  letter-spacing: 0.02em;
+}
+
+.topbar-nav a
+{
+  display: inline-block;
+}
+
+.topbar-nav a[aria-current="page"]
+{
+  text-decoration: underline;
+}
+
+.lang
+{
+  text-transform: lowercase;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.content
+{
+  margin-top: 70px;
+}
+
+.page-title
+{
+  margin: 0 0 12px 0;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.hero
+{
+  display: grid;
+  gap: 18px;
+}
+
+.hero img
+{
+  display: block;
+}
+
+.media img
+{
+  width: 100%;
+  max-height: 560px;
+  object-fit: cover;
+  display: block;
+}
+
+.caption
+{
+  color: var(--muted);
+}
+
+.grid
+{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.card
+{
+  border-top: 1px solid var(--rule);
+  padding-top: 12px;
+}
+
+.card img
+{
+  display: block;
+  margin-top: 10px;
+}
+
+.card h3
+{
+  margin: 0;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.card p
+{
+  margin: 6px 0 0 0;
+  color: var(--muted);
+}
+
+.small
+{
+  color: var(--muted);
+}
+
+.footer
+{
+  margin-top: 40px;
+  border-top: 1px solid var(--rule);
+  padding-top: 18px;
+  color: var(--muted);
+}
+
+@media (max-width: 1000px)
+{
+  .page
+  {
+    padding-left: var(--page-pad-x-m);
+    padding-right: var(--page-pad-x-m);
+  }
+
+  .topbar
+  {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .brand
+  {
+    white-space: normal;
+  }
+
+  .topbar-nav
+  {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .content
+  {
+    margin-top: 34px;
+  }
+
+  .grid
+  {
+    grid-template-columns: 1fr;
+  }
+}
