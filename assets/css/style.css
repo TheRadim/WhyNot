@@ -1,20 +1,6 @@
-/* ==========================================================================
-   Studio Template — style.css
-   Split into sections for easy navigation:
-   1) Global / Tokens
-   2) Global Elements
-   3) Global Header (layout in your screenshot)
-   4) Index (Landing)
-   5) Projects
-   6) Studio
-   7) Contact
-   8) Footer
-   9) Responsive (later)
-   ========================================================================== */
-
-/* ==========================================================================
-   1) Global / Tokens
-   ========================================================================== */
+/* =========================
+   1) Tokens
+   ========================= */
 
 :root
 {
@@ -23,40 +9,26 @@
   --rule: rgba(35, 35, 35, 0.12);
   --paper: #fff;
 
-  /* Overall body canvas like in your diagram */
   --body-max: 1600px;
-
-  /* Header max (full width but capped) */
   --header-max: 1600px;
-
-  /* Content column max */
   --content-max: 1000px;
 
-  /* Brand block width (left) */
   --brand-w: 300px;
-
-  /* Right “breathing room” for nav (margin-right 300px) */
   --nav-right-gap: 300px;
 
-  /* Page padding */
   --page-pad-x: 64px;
   --top-pad: 38px;
-
-  /* Header height */
   --header-min-h: 10vh;
-
-  /* Nav spacing */
   --nav-gap: 28px;
 
-  /* Type */
   --font: "Open Sans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   --fs: 11px;
   --lh: 2.0em;
 }
 
-/* ==========================================================================
-   2) Global Elements
-   ========================================================================== */
+/* =========================
+   2) Global
+   ========================= */
 
 *,
 *::before,
@@ -106,30 +78,28 @@ img
   display: block;
 }
 
-/* ==========================================================================
-   3) Global Header (matches your structure.png)
-   - Body canvas: max 1600px centered
-   - Header: full width up to 1600px
-   - Brand: fixed 300px on the left
-   - Nav: max 1000px, centered, with extra 300px breathing room on the right
-   - Desktop only (we’ll do mobile later)
-   ========================================================================== */
+/* =========================
+   3) Layout
+   ========================= */
 
-/* The overall canvas (your “Body - 1600px max”) */
 .page
 {
   max-width: var(--body-max);
   margin: 0 auto;
-  padding: 0 var(--page-pad-x) 80px;
+  padding: 0 var(--page-pad-x) 5vw;
 }
 
-/* Header strip */
+/* =========================
+   4) Header
+   ========================= */
+
 .topbar
 {
   width: 100%;
   max-width: var(--header-max);
   min-height: var(--header-min-h);
   padding-top: var(--top-pad);
+  position: relative;
 
   display: grid;
   grid-template-columns: var(--brand-w) minmax(0, 1fr);
@@ -137,7 +107,6 @@ img
   column-gap: 22px;
 }
 
-/* Left brand block (clickable) */
 .brand
 {
   width: var(--brand-w);
@@ -148,7 +117,6 @@ img
   letter-spacing: 0.02em;
   white-space: nowrap;
   font-size: var(--fs);
-
   font-weight: 400;
 }
 
@@ -167,7 +135,6 @@ img
   color: var(--muted);
 }
 
-/* Nav wrapper cell: we use a max-width container inside */
 .topbar-nav
 {
   justify-self: center;
@@ -177,33 +144,7 @@ img
 
   display: flex;
   align-items: flex-start;
-  justify-content: center;
-  gap: var(--nav-gap);
-
-  text-transform: lowercase;
-  letter-spacing: 0.02em;
-
-  /* This is the key: push nav left by giving it extra right margin */
-  margin-right: var(--nav-right-gap);
-}
-
-/* Active page underline */
-.topbar-nav a[aria-current="page"]
-{
-  text-decoration: underline;
-}
-
-/* NAV CONTAINER */
-.topbar-nav
-{
-  justify-self: center;
-
-  width: 100%;
-  max-width: var(--content-max);
-
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between; /* <<< splits left and right groups */
+  justify-content: space-between;
 
   text-transform: lowercase;
   letter-spacing: 0.02em;
@@ -211,36 +152,86 @@ img
   margin-right: var(--nav-right-gap);
 }
 
-/* Left links */
 .nav-left
 {
   display: flex;
   gap: var(--nav-gap);
 }
 
-/* Right links */
 .nav-right
 {
   display: flex;
   gap: var(--nav-gap);
 }
 
-/* Active page underline */
 .topbar-nav a[aria-current="page"]
 {
   text-decoration: underline;
 }
 
-/* ==========================================================================
-   4) Index (Landing)
-   - Content column: max 1000px centered
-   ========================================================================== */
+/* =========================
+   5) Burger + Overlay
+   ========================= */
+
+.nav-toggle
+{
+  display: none;
+  position: absolute;
+  right: 10vw;
+  top: var(--top-pad);
+
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-toggle span
+{
+  display: block;
+  width: 18px;
+  height: 1px;
+  background: var(--ink);
+  margin: 5px 0;
+}
+
+.overlay-nav
+{
+  position: fixed;
+  inset: 0;
+  background: var(--paper);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+
+  font-size: var(--fs);
+  text-transform: lowercase;
+  letter-spacing: 0.02em;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.overlay-nav.active
+{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* =========================
+   6) Index
+   ========================= */
 
 .content
 {
   max-width: var(--content-max);
-  margin: 0 auto;
-  padding-top: 28px;
+  margin-right: auto;
+  padding-top: 40px;
+  margin-left: 200px;
 }
 
 .page-title
@@ -268,7 +259,6 @@ img
   color: var(--muted);
 }
 
-/* Optional “media” helper if you want fixed-height crops */
 .media img
 {
   width: 100%;
@@ -276,9 +266,9 @@ img
   object-fit: cover;
 }
 
-/* ==========================================================================
-   5) Projects
-   ========================================================================== */
+/* =========================
+   7) Projects
+   ========================= */
 
 .grid
 {
@@ -311,21 +301,9 @@ img
   margin-top: 10px;
 }
 
-/* ==========================================================================
-   6) Studio
-   ========================================================================== */
-
-/* (Add studio-specific overrides here if needed) */
-
-/* ==========================================================================
-   7) Contact
-   ========================================================================== */
-
-/* (Add contact-specific styles here if needed) */
-
-/* ==========================================================================
+/* =========================
    8) Footer
-   ========================================================================== */
+   ========================= */
 
 .footer
 {
@@ -340,7 +318,26 @@ img
   color: var(--muted);
 }
 
-/* ==========================================================================
-   9) Responsive (later)
-   - You asked desktop only for now, so we keep this empty / minimal.
-   ========================================================================== */
+/* =========================
+   9) Responsive
+   ========================= */
+
+@media (max-width: 900px)
+{
+  .topbar-nav
+  {
+    display: none;
+  }
+
+  .nav-toggle
+  {
+    display: block;
+  }
+
+  .content
+  {
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
