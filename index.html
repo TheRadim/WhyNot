@@ -10,49 +10,48 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
-
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
 <body>
   <div class="page">
     <header class="topbar">
-      <h1 class="brand">
-        <b>WHY NOT?</b><br />
-        Street in CPH, No Sweden vibes<br />
-        Copenhagen, Denmark
-      </h1>
+      <a class="brand" href="index.html" aria-label="Go to home">
+        <span class="brand-name">WHY NOT?</span><br />
+        <span class="brand-address">Street in CPH, No Sweden vibes</span><br />
+        <span class="brand-address">Copenhagen, Denmark</span>
+      </a>
 
       <nav class="topbar-nav" data-nav>
-        <a href="projects.html">projekter</a>
-        <a href="studio.html">kontor</a>
-        <a href="#">presse</a>
-        <a href="contact.html">kontakt</a>
-        <a href="https://instagram.com/" target="_blank" rel="noopener">instagram</a>
-      </nav>
+        <div class="nav-left">
+          <a href="projects.html">projects</a>
+          <a href="studio.html">studio</a>
+          <a href="#">press</a>
+          <a href="contact.html">contact</a>
+        </div>
 
-      <a class="lang" href="#">english</a>
+        <div class="nav-right">
+          <a href="https://instagram.com/" target="_blank" rel="noopener">instagram</a>
+        </div>
+      </nav>
     </header>
 
     <main class="content">
       <h2 class="page-title">Landing</h2>
 
-      <section class="hero" data-repeat="3">
-        <img src="assets/img/hero.jpg" alt="Hero image" width="1600" height="1000" />
-        <p class="caption">
-          Lorem ipsum caption. Photo: Name Surname.
-        </p>
+      <section class="hero">
+        <img src="assets/img/17.webp" alt="Hero image" width="1600" height="1000" />
+        <p class="caption">Lorem ipsum caption. Photo: Name Surname.</p>
       </section>
 
-      <div class="footer">
+      <footer class="footer">
         <div class="small">© <span id="y"></span> Studio Name. All rights reserved.</div>
-      </div>
+      </footer>
     </main>
   </div>
 
-  <script src="assets/js/main.js"></script>
   <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
+    document.getElementById("y").textContent = new Date().getFullYear();
   </script>
 </body>
 

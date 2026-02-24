@@ -1,9 +1,20 @@
-/*
-  Minimal template inspired by Johansen Skovsted layout
-  - Open Sans typography
-  - Top header (address / nav / language)
-  - Simple pages: Home / Projects / Studio / Contact
-*/
+/* ==========================================================================
+   Studio Template — style.css
+   Split into sections for easy navigation:
+   1) Global / Tokens
+   2) Global Elements
+   3) Global Header (layout in your screenshot)
+   4) Index (Landing)
+   5) Projects
+   6) Studio
+   7) Contact
+   8) Footer
+   9) Responsive (later)
+   ========================================================================== */
+
+/* ==========================================================================
+   1) Global / Tokens
+   ========================================================================== */
 
 :root
 {
@@ -12,13 +23,40 @@
   --rule: rgba(35, 35, 35, 0.12);
   --paper: #fff;
 
-  --page-max: 1120px;
-  --page-pad-x: 64px;
-  --page-pad-x-m: 18px;
+  /* Overall body canvas like in your diagram */
+  --body-max: 1600px;
 
-  --top-pad: 26px;
+  /* Header max (full width but capped) */
+  --header-max: 1600px;
+
+  /* Content column max */
+  --content-max: 1000px;
+
+  /* Brand block width (left) */
+  --brand-w: 300px;
+
+  /* Right “breathing room” for nav (margin-right 300px) */
+  --nav-right-gap: 300px;
+
+  /* Page padding */
+  --page-pad-x: 64px;
+  --top-pad: 38px;
+
+  /* Header height */
+  --header-min-h: 10vh;
+
+  /* Nav spacing */
   --nav-gap: 28px;
+
+  /* Type */
+  --font: "Open Sans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  --fs: 11px;
+  --lh: 2.0em;
 }
+
+/* ==========================================================================
+   2) Global Elements
+   ========================================================================== */
 
 *,
 *::before,
@@ -38,16 +76,9 @@ body
 {
   background: var(--paper);
   color: var(--ink);
-  font-family: "Open Sans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  font-size: 11px;
-  line-height: 2.0em;
-}
-
-.page
-{
-  max-width: var(--page-max);
-  margin: 0 auto;
-  padding: var(--top-pad) var(--page-pad-x) 80px;
+  font-family: var(--font);
+  font-size: var(--fs);
+  line-height: var(--lh);
 }
 
 a
@@ -72,63 +103,150 @@ img
 {
   max-width: 100%;
   height: auto;
+  display: block;
 }
 
+/* ==========================================================================
+   3) Global Header (matches your structure.png)
+   - Body canvas: max 1600px centered
+   - Header: full width up to 1600px
+   - Brand: fixed 300px on the left
+   - Nav: max 1000px, centered, with extra 300px breathing room on the right
+   - Desktop only (we’ll do mobile later)
+   ========================================================================== */
+
+/* The overall canvas (your “Body - 1600px max”) */
+.page
+{
+  max-width: var(--body-max);
+  margin: 0 auto;
+  padding: 0 var(--page-pad-x) 80px;
+}
+
+/* Header strip */
 .topbar
 {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 22px;
-  padding-top: 6px;
+  width: 100%;
+  max-width: var(--header-max);
+  min-height: var(--header-min-h);
+  padding-top: var(--top-pad);
+
+  display: grid;
+  grid-template-columns: var(--brand-w) minmax(0, 1fr);
+  align-items: start;
+  column-gap: 22px;
 }
 
+/* Left brand block (clickable) */
 .brand
 {
+  width: var(--brand-w);
   margin: 0;
+
   line-height: 1.8em;
   text-transform: lowercase;
   letter-spacing: 0.02em;
   white-space: nowrap;
+  font-size: var(--fs);
+
+  font-weight: 400;
 }
 
+.brand:hover
+{
+  text-decoration: none;
+}
+
+.brand-name
+{
+  font-weight: 400;
+}
+
+.brand-address
+{
+  color: var(--muted);
+}
+
+/* Nav wrapper cell: we use a max-width container inside */
 .topbar-nav
 {
+  justify-self: center;
+
+  width: 100%;
+  max-width: var(--content-max);
+
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  flex: 1;
   gap: var(--nav-gap);
+
   text-transform: lowercase;
   letter-spacing: 0.02em;
+
+  /* This is the key: push nav left by giving it extra right margin */
+  margin-right: var(--nav-right-gap);
 }
 
-.topbar-nav a
-{
-  display: inline-block;
-}
-
+/* Active page underline */
 .topbar-nav a[aria-current="page"]
 {
   text-decoration: underline;
 }
 
-.lang
+/* NAV CONTAINER */
+.topbar-nav
 {
+  justify-self: center;
+
+  width: 100%;
+  max-width: var(--content-max);
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between; /* <<< splits left and right groups */
+
   text-transform: lowercase;
   letter-spacing: 0.02em;
-  white-space: nowrap;
+
+  margin-right: var(--nav-right-gap);
 }
+
+/* Left links */
+.nav-left
+{
+  display: flex;
+  gap: var(--nav-gap);
+}
+
+/* Right links */
+.nav-right
+{
+  display: flex;
+  gap: var(--nav-gap);
+}
+
+/* Active page underline */
+.topbar-nav a[aria-current="page"]
+{
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   4) Index (Landing)
+   - Content column: max 1000px centered
+   ========================================================================== */
 
 .content
 {
-  margin-top: 70px;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding-top: 28px;
 }
 
 .page-title
 {
   margin: 0 0 12px 0;
-  font-size: 11px;
+  font-size: var(--fs);
   font-weight: 400;
   letter-spacing: 0.02em;
 }
@@ -141,21 +259,26 @@ img
 
 .hero img
 {
-  display: block;
-}
-
-.media img
-{
   width: 100%;
-  max-height: 560px;
-  object-fit: cover;
-  display: block;
+  height: auto;
 }
 
 .caption
 {
   color: var(--muted);
 }
+
+/* Optional “media” helper if you want fixed-height crops */
+.media img
+{
+  width: 100%;
+  max-height: 560px;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   5) Projects
+   ========================================================================== */
 
 .grid
 {
@@ -170,16 +293,10 @@ img
   padding-top: 12px;
 }
 
-.card img
-{
-  display: block;
-  margin-top: 10px;
-}
-
 .card h3
 {
   margin: 0;
-  font-size: 11px;
+  font-size: var(--fs);
   font-weight: 400;
 }
 
@@ -189,10 +306,26 @@ img
   color: var(--muted);
 }
 
-.small
+.card img
 {
-  color: var(--muted);
+  margin-top: 10px;
 }
+
+/* ==========================================================================
+   6) Studio
+   ========================================================================== */
+
+/* (Add studio-specific overrides here if needed) */
+
+/* ==========================================================================
+   7) Contact
+   ========================================================================== */
+
+/* (Add contact-specific styles here if needed) */
+
+/* ==========================================================================
+   8) Footer
+   ========================================================================== */
 
 .footer
 {
@@ -202,39 +335,12 @@ img
   color: var(--muted);
 }
 
-@media (max-width: 1000px)
+.small
 {
-  .page
-  {
-    padding-left: var(--page-pad-x-m);
-    padding-right: var(--page-pad-x-m);
-  }
-
-  .topbar
-  {
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  .brand
-  {
-    white-space: normal;
-  }
-
-  .topbar-nav
-  {
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-
-  .content
-  {
-    margin-top: 34px;
-  }
-
-  .grid
-  {
-    grid-template-columns: 1fr;
-  }
+  color: var(--muted);
 }
+
+/* ==========================================================================
+   9) Responsive (later)
+   - You asked desktop only for now, so we keep this empty / minimal.
+   ========================================================================== */
