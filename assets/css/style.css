@@ -1,7 +1,3 @@
-/* =========================
-   1) Tokens
-   ========================= */
-
 :root
 {
   --ink: #232323;
@@ -13,22 +9,31 @@
   --header-max: 1600px;
   --content-max: 1000px;
 
-  --brand-w: 300px;
-  --nav-right-gap: 300px;
+  --brand-w: 200px;
+  --nav-right-gap-max: 200px;
 
   --page-pad-x: 64px;
   --top-pad: 38px;
   --header-min-h: 10vh;
+
   --nav-gap: 28px;
 
   --font: "Open Sans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   --fs: 11px;
   --lh: 2.0em;
-}
 
-/* =========================
-   2) Global
-   ========================= */
+  --col-gap: 22px;
+
+  --canvas-w: min(100vw, var(--header-max));
+  --inner-w: calc(var(--canvas-w) - (var(--page-pad-x) * 2));
+  --nav-right-gap: clamp(
+    0px,
+    calc(var(--inner-w) - var(--brand-w) - var(--content-max) - var(--col-gap)),
+    var(--nav-right-gap-max)
+  );
+
+  --content-offset: calc(var(--brand-w) + var(--col-gap));
+}
 
 *,
 *::before,
@@ -79,7 +84,7 @@ img
 }
 
 /* =========================
-   3) Layout
+   Layout
    ========================= */
 
 .page
@@ -90,7 +95,7 @@ img
 }
 
 /* =========================
-   4) Header
+   Header
    ========================= */
 
 .topbar
@@ -102,9 +107,9 @@ img
   position: relative;
 
   display: grid;
-  grid-template-columns: var(--brand-w) minmax(0, 1fr);
+  grid-template-columns: var(--brand-w) minmax(0, var(--content-max)) var(--nav-right-gap);
   align-items: start;
-  column-gap: 22px;
+  column-gap: var(--col-gap);
 }
 
 .brand
@@ -112,6 +117,7 @@ img
   width: var(--brand-w);
   margin: 0;
 
+  text-align: right;
   line-height: 1.8em;
   text-transform: lowercase;
   letter-spacing: 0.02em;
@@ -137,27 +143,18 @@ img
 
 .topbar-nav
 {
-  justify-self: center;
+  grid-column: 2;
 
   width: 100%;
-  max-width: var(--content-max);
-
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
 
   text-transform: lowercase;
   letter-spacing: 0.02em;
-
-  margin-right: var(--nav-right-gap);
 }
 
-.nav-left
-{
-  display: flex;
-  gap: var(--nav-gap);
-}
-
+.nav-left,
 .nav-right
 {
   display: flex;
@@ -170,14 +167,14 @@ img
 }
 
 /* =========================
-   5) Burger + Overlay
+   Burger + Overlay
    ========================= */
 
 .nav-toggle
 {
   display: none;
   position: absolute;
-  right: 10vw;
+  right: 0;
   top: var(--top-pad);
 
   background: none;
@@ -213,7 +210,7 @@ img
 
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.25s ease;
 }
 
 .overlay-nav.active
@@ -222,16 +219,28 @@ img
   pointer-events: auto;
 }
 
+/* Auto-collapse switch (JS toggles this class) */
+.topbar.is-collapsed .topbar-nav
+{
+  display: none;
+}
+
+.topbar.is-collapsed .nav-toggle
+{
+  display: block;
+}
+
 /* =========================
-   6) Index
+   Index
    ========================= */
 
 .content
 {
   max-width: var(--content-max);
-  margin-right: auto;
   padding-top: 40px;
-  margin-left: 200px;
+
+  margin-left: var(--content-offset);
+  margin-right: auto;
 }
 
 .page-title
@@ -266,38 +275,43 @@ img
   object-fit: cover;
 }
 
+/* Safety: if you want a hard breakpoint fallback too */
+@media (max-width: 1000px)
+{
+  .content
+  {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 /* =========================
    7) Projects
    ========================= */
 
-.grid
-{
+.grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
 }
 
-.card
-{
+.card {
   border-top: 1px solid var(--rule);
   padding-top: 12px;
 }
 
-.card h3
-{
+.card h3 {
   margin: 0;
   font-size: var(--fs);
   font-weight: 400;
 }
 
-.card p
-{
+.card p {
   margin: 6px 0 0 0;
   color: var(--muted);
 }
 
-.card img
-{
+.card img {
   margin-top: 10px;
 }
 
@@ -305,16 +319,14 @@ img
    8) Footer
    ========================= */
 
-.footer
-{
+.footer {
   margin-top: 40px;
   border-top: 1px solid var(--rule);
   padding-top: 18px;
   color: var(--muted);
 }
 
-.small
-{
+.small {
   color: var(--muted);
 }
 
@@ -322,21 +334,55 @@ img
    9) Responsive
    ========================= */
 
-@media (max-width: 900px)
-{
-  .topbar-nav
-  {
+@media (max-width: 1000px) {
+  .topbar-nav {
     display: none;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .content {
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 768px)
+{
+  :root
+  {
+    --top-pad: 18px;        /* was 38px */
+    --header-min-h: 7vh;    /* was 10vh */
+    --page-pad-x: 20px;     /* was 64px */
+  }
+
+  .page
+  {
+    padding: 0 var(--page-pad-x) 8vw;
+  }
+
+  .topbar
+  {
+    min-height: var(--header-min-h);
+    padding-top: var(--top-pad);
+  }
+
+  .brand
+  {
+    font-size: 10px;        /* slightly tighter */
+    line-height: 1.6em;
   }
 
   .nav-toggle
   {
-    display: block;
+    top: var(--top-pad);
   }
 
   .content
   {
-    padding-right: 0;
     margin-left: auto;
     margin-right: auto;
   }

@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -12,6 +13,7 @@
 
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
+
 <body>
   <div class="page">
     <header class="topbar">
@@ -21,11 +23,15 @@
         <span class="brand-address">Copenhagen, Denmark</span>
       </a>
 
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+      </button>
+
       <nav class="topbar-nav" data-nav>
         <div class="nav-left">
           <a href="projects.html">projects</a>
           <a href="studio.html">studio</a>
-          <a href="#">press</a>
           <a href="contact.html">contact</a>
         </div>
 
@@ -34,6 +40,13 @@
         </div>
       </nav>
     </header>
+
+    <div class="overlay-nav">
+      <a href="projects.html" data-keep>projects</a>
+      <a href="studio.html">studio</a>
+      <a href="contact.html">contact</a>
+      <a href="https://instagram.com/" target="_blank">instagram</a>
+    </div>
 
     <main class="content">
       <h2 class="page-title">Contact</h2>
@@ -58,4 +71,5 @@
 
   <script src="assets/js/main.js"></script>
 </body>
+
 </html>

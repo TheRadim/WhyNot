@@ -31,7 +31,6 @@
         <div class="nav-left">
           <a href="projects.html">projects</a>
           <a href="studio.html">studio</a>
-          <a href="#">press</a>
           <a href="contact.html">contact</a>
         </div>
 
@@ -44,7 +43,6 @@
     <div class="overlay-nav">
       <a href="projects.html" data-keep>projects</a>
       <a href="studio.html">studio</a>
-      <a href="#">press</a>
       <a href="contact.html">contact</a>
       <a href="https://instagram.com/" target="_blank">instagram</a>
     </div>
@@ -62,36 +60,7 @@
       </footer>
     </main>
   </div>
-
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
-
-  <script>
-    const toggle = document.querySelector('.nav-toggle');
-    const overlay = document.querySelector('.overlay-nav');
-
-    if (toggle && overlay) {
-
-      // Open / close with burger
-      toggle.addEventListener('click', () => {
-        overlay.classList.toggle('active');
-      });
-
-      // Click anywhere on overlay
-      overlay.addEventListener('click', (e) => {
-
-        // If clicked link has data-keep → do nothing
-        if (e.target.closest('[data-keep]')) {
-          return;
-        }
-
-        // Otherwise close overlay
-        overlay.classList.remove('active');
-      });
-
-    }
-  </script>
+  <script src="assets/js/main.js"></script>
 </body>
 
 </html>
