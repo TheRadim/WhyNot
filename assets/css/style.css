@@ -102,7 +102,7 @@ img
 
   position: relative;
   min-height: 100vh;
-  padding-bottom: 90px; /* keeps content clear of fixed footer */
+  padding-bottom: 90px;
 }
 
 /* =========================
@@ -116,6 +116,7 @@ img
   min-height: var(--header-min-h);
   padding-top: var(--top-pad);
   position: relative;
+  z-index: 10;
 
   display: grid;
   grid-template-columns: var(--brand-w) minmax(0, var(--content-max)) var(--nav-right-gap);
@@ -180,7 +181,8 @@ img
   display: none;
   position: absolute;
   right: 0;
-  top: var(--top-pad);
+  top: 50%;
+  transform: translateY(-50%);
 
   background: none;
   border: 0;
@@ -201,6 +203,8 @@ img
 {
   position: fixed;
   inset: 0;
+  z-index: 200; /* <<< add this */
+
   background: var(--paper);
 
   display: flex;
@@ -313,16 +317,35 @@ img
 
   display: flex;
   flex-direction: column;
-  gap: 14px;
+
+  position: relative; /* needed for pseudo-element */
+  margin-top: 16px;   /* space between tabs and line */
+  padding-top: 16px;  /* space between line and project */
 }
 
+/* Thin separator line */
+.projects-shell::before
+{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10px;
+  right: 10px;
+
+  height: 1px;
+  background: var(--rule);
+}
+
+/* Make the viewer itself a flex column.
+   Top: title + text (natural height)
+   Bottom: media (fills remaining space and centers its content) */
 .project-view
 {
   flex: 1;
   min-height: 0;
 
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+  display: flex;
+  flex-direction: column;
   gap: 12px;
 }
 
@@ -333,31 +356,44 @@ img
   font-weight: 400;
 }
 
-.project-media
-{
-  min-height: 0;
-  overflow: hidden;
-}
-
-.project-img
-{
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
 .project-text
 {
   margin: 0;
   color: var(--muted);
+  max-width: 72ch;
 }
 
+/* This is the key: media takes the leftover height */
+.project-media
+{
+  flex: 1;
+  min-height: 0;
+
+  display: flex;
+  align-items: center;      /* vertical centering */
+  justify-content: center;  /* horizontal centering */
+
+  overflow: hidden;
+}
+
+/* Image can be smaller than container; we contain it and keep it centered */
+.project-img
+{
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Tabs */
 .project-tabs
 {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
-  gap: var(--nav-gap);
-  white-space: nowrap;
+  gap: 10px var(--nav-gap);
+  margin-bottom: 14px;
 }
 
 .project-tab
@@ -366,7 +402,6 @@ img
   background: transparent;
   border: 0;
   padding: 0;
-  margin-bottom: 20px;
 
   color: inherit;
   font: inherit;
@@ -489,16 +524,33 @@ img
   {
     padding-left: var(--page-pad-x);
     padding-right: var(--page-pad-x);
+    padding-top: 6px;
+    padding-bottom: 4px;
+    text-align: center;
+    line-height: 0.4em;
   }
 
-  .footer-row
+    .footer-row
   {
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
   }
 
-  .nav-toggle
+  .footer-left
   {
-    top: var(--top-pad);
+    max-width: 100%;
+  }
+
+  .footer-address
+  {
+    line-height: 1.4em;
+  }
+
+  .footer-right
+  {
+    justify-content: center;
+    gap: 18px;
   }
 }
