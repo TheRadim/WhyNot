@@ -447,6 +447,24 @@ img {
   outline-offset: 2px;
 }
 
+.project-meta {
+  margin: 0;
+  color: var(--muted);
+  max-width: 72ch;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.meta-line {
+  line-height: 1.5em;
+}
+
+.meta-line:first-child {
+  color: var(--ink);
+}
+
 /* =========================
    8) Footer (fixed)
    ========================= */
@@ -568,8 +586,8 @@ img {
   }
 
   .hero img {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-}
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+  }
 }
