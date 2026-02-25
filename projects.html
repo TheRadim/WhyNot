@@ -10,12 +10,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
-
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
-<body>
-  <div class="page">
+<body class="page-projects">
+  <div class="page page--projects">
     <header class="topbar">
       <a class="brand" href="index.html" aria-label="Go to home">
         <img class="brand-logo" src="assets/img/logo.png" alt="Why Not logo" />
@@ -42,42 +41,55 @@
       <a href="projects.html" data-keep>projects</a>
       <a href="studio.html">studio</a>
       <a href="contact.html">contact</a>
-      <a href="https://instagram.com/" target="_blank">instagram</a>
+      <a href="https://instagram.com/" target="_blank" rel="noopener">instagram</a>
+      <a href="https://linkedin.com/" target="_blank" rel="noopener">linkedin</a>
     </div>
 
-    <main class="content">
+    <main class="content content--projects" data-projects>
+
       <h2 class="page-title">Projects</h2>
 
-      <div class="grid">
-        <article class="card">
-          <h3>Project One</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Year: 2025.</p>
-          <img src="assets/img/17.webp" alt="Project image" loading="lazy" width="1600" height="1000" />
-        </article>
 
-        <article class="card">
-          <h3>Project Two</h3>
-          <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Year: 2024.</p>
-          <img src="assets/img/17.webp" alt="Project image" loading="lazy" width="1600" height="1000" />
-        </article>
+      <nav class="project-tabs" aria-label="Project list">
+        <button class="project-tab" type="button" data-project="0" aria-current="page">project 1</button>
+        <button class="project-tab" type="button" data-project="1">project 2</button>
+        <button class="project-tab" type="button" data-project="2">project 3</button>
+        <button class="project-tab" type="button" data-project="3">project 4</button>
+        <button class="project-tab" type="button" data-project="4">project 5</button>
+        <button class="project-tab" type="button" data-project="5">project 6</button>
+      </nav>
 
-        <article class="card">
-          <h3>Project Three</h3>
-          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Year: 2023.</p>
-          <img src="assets/img/17.webp" alt="Project image" loading="lazy" width="1600" height="1000" />
-        </article>
+      <section class="projects-shell" aria-label="Project viewer">
+        <div class="project-view" aria-live="polite">
+          <h3 class="project-title" data-project-title>Project One</h3>
 
-        <article class="card">
-          <h3>Project Four</h3>
-          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum. Year: 2022.</p>
-          <img src="assets/img/17.webp" alt="Project image" loading="lazy" width="1600" height="1000" />
-        </article>
-      </div>
+          <p class="project-text" data-project-text>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Year: 2025.
+          </p>
 
-      <div class="footer">
-        <div class="small">Tip: duplicate cards, replace titles, swap the single image.</div>
-      </div>
+          <div class="project-media">
+            <img class="project-img" data-project-img src="assets/img/17.webp" alt="Project image" width="1600"
+              height="1000" />
+          </div>
+        </div>
+      </section>
     </main>
+
+    <footer class="footer">
+        <div class="footer-row">
+          <div class="footer-left">
+            <div class="footer-address">
+              Street in CPH, No Swedish vibes,
+              CPH, Denmark
+            </div>
+          </div>
+
+          <div class="footer-right">
+            <a href="https://instagram.com/" target="_blank" rel="noopener">instagram</a>
+            <a href="https://linkedin.com/" target="_blank" rel="noopener">linkedin</a>
+          </div>
+        </div>
+      </footer>
   </div>
 
   <script src="assets/js/main.js"></script>

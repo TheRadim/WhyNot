@@ -1,3 +1,7 @@
+/* =========================
+   1) Tokens
+   ========================= */
+
 :root
 {
   --ink: #232323;
@@ -9,20 +13,19 @@
   --header-max: 1600px;
   --content-max: 1000px;
 
-  --brand-w: 200px;
-  --nav-right-gap-max: 200px;
+  --brand-w: 100px;
+  --nav-right-gap-max: 100px;
 
   --page-pad-x: 64px;
   --top-pad: 38px;
   --header-min-h: 10vh;
 
   --nav-gap: 28px;
+  --col-gap: 22px;
 
   --font: "Open Sans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   --fs: 11px;
   --lh: 2.0em;
-
-  --col-gap: 22px;
 
   --canvas-w: min(100vw, var(--header-max));
   --inner-w: calc(var(--canvas-w) - (var(--page-pad-x) * 2));
@@ -34,6 +37,10 @@
 
   --content-offset: calc(var(--brand-w) + var(--col-gap));
 }
+
+/* =========================
+   2) Global
+   ========================= */
 
 *,
 *::before,
@@ -84,7 +91,7 @@ img
 }
 
 /* =========================
-   Layout
+   3) Layout
    ========================= */
 
 .page
@@ -92,10 +99,14 @@ img
   max-width: var(--body-max);
   margin: 0 auto;
   padding: 0 var(--page-pad-x) 5vw;
+
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 90px; /* keeps content clear of fixed footer */
 }
 
 /* =========================
-   Header
+   4) Header
    ========================= */
 
 .topbar
@@ -117,13 +128,8 @@ img
   width: var(--brand-w);
   margin: 0;
 
+  display: block;
   text-align: right;
-  line-height: 1.8em;
-  text-transform: lowercase;
-  letter-spacing: 0.02em;
-  white-space: nowrap;
-  font-size: var(--fs);
-  font-weight: 400;
 }
 
 .brand:hover
@@ -131,14 +137,13 @@ img
   text-decoration: none;
 }
 
-.brand-name
+.brand-logo
 {
-  font-weight: 400;
-}
-
-.brand-address
-{
-  color: var(--muted);
+  width: 100%;
+  max-width: 100px;
+  max-height: 100px;
+  height: auto;
+  margin-left: auto;
 }
 
 .topbar-nav
@@ -167,7 +172,7 @@ img
 }
 
 /* =========================
-   Burger + Overlay
+   5) Burger + Overlay
    ========================= */
 
 .nav-toggle
@@ -219,7 +224,6 @@ img
   pointer-events: auto;
 }
 
-/* Auto-collapse switch (JS toggles this class) */
 .topbar.is-collapsed .topbar-nav
 {
   display: none;
@@ -228,221 +232,16 @@ img
 .topbar.is-collapsed .nav-toggle
 {
   display: block;
-}
-
-
-:root
-{
-  --ink: #232323;
-  --muted: rgba(35, 35, 35, 0.65);
-  --rule: rgba(35, 35, 35, 0.12);
-  --paper: #fff;
-
-  --body-max: 1600px;
-  --header-max: 1600px;
-  --content-max: 1000px;
-
-  --brand-w: 200px;
-  --nav-right-gap-max: 200px;
-
-  --page-pad-x: 64px;
-  --top-pad: 38px;
-  --header-min-h: 10vh;
-
-  --nav-gap: 28px;
-
-  --font: "Open Sans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  --fs: 11px;
-  --lh: 2.0em;
-
-  --col-gap: 22px;
-
-  --canvas-w: min(100vw, var(--header-max));
-  --inner-w: calc(var(--canvas-w) - (var(--page-pad-x) * 2));
-  --nav-right-gap: clamp(
-    0px,
-    calc(var(--inner-w) - var(--brand-w) - var(--content-max) - var(--col-gap)),
-    var(--nav-right-gap-max)
-  );
-
-  --content-offset: calc(var(--brand-w) + var(--col-gap));
-}
-
-.topbar
-{
-  width: 100%;
-  max-width: var(--header-max);
-  min-height: var(--header-min-h);
-  padding-top: var(--top-pad);
-  position: relative;
-
-  display: grid;
-  grid-template-columns: var(--brand-w) minmax(0, var(--content-max)) var(--nav-right-gap);
-  align-items: start;
-  column-gap: var(--col-gap);
-}
-
-.brand
-{
-  width: var(--brand-w);
-  margin: 0;
-  display: block;
-  text-align: right;
-}
-
-.brand:hover
-{
-  text-decoration: none;
-}
-
-.brand-logo
-{
-  width: 100%;
-  max-width: 150px;
-  height: auto;
-  margin-left: auto;
-}
-
-.topbar-nav
-{
-  grid-column: 2;
-
-  width: 100%;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-
-  text-transform: lowercase;
-  letter-spacing: 0.02em;
-}
-
-.nav-left,
-.nav-right
-{
-  display: flex;
-  gap: var(--nav-gap);
-}
-
-/* Burger + Overlay */
-.nav-toggle
-{
-  display: none;
-  position: absolute;
-  right: 0;
-  top: var(--top-pad);
-
-  background: none;
-  border: 0;
-  cursor: pointer;
-  padding: 0;
-}
-
-.nav-toggle span
-{
-  display: block;
-  width: 18px;
-  height: 1px;
-  background: var(--ink);
-  margin: 5px 0;
-}
-
-.overlay-nav
-{
-  position: fixed;
-  inset: 0;
-  background: var(--paper);
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 22px;
-
-  font-size: var(--fs);
-  text-transform: lowercase;
-  letter-spacing: 0.02em;
-
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s ease;
-}
-
-.overlay-nav.active
-{
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.topbar.is-collapsed .topbar-nav
-{
-  display: none;
-}
-
-.topbar.is-collapsed .nav-toggle
-{
-  display: block;
-}
-
-/* Footer layout */
-.footer
-{
-  margin-top: 40px;
-  border-top: 1px solid var(--rule);
-  padding-top: 18px;
-  color: var(--muted);
-}
-
-.footer-row
-{
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 22px;
-  margin-bottom: 10px;
-}
-
-.footer-left
-{
-  max-width: 520px;
-}
-
-.footer-right
-{
-  display: flex;
-  gap: var(--nav-gap);
-  white-space: nowrap;
-}
-
-.footer-address
-{
-  color: var(--muted);
-}
-
-/* Mobile */
-@media (max-width: 768px)
-{
-  :root
-  {
-    --top-pad: 18px;
-    --header-min-h: 7vh;
-    --page-pad-x: 20px;
-  }
-
-  .footer-row
-  {
-    flex-direction: column;
-    gap: 10px;
-  }
 }
 
 /* =========================
-   Index
+   6) Index
    ========================= */
 
 .content
 {
   max-width: var(--content-max);
-  padding-top: 40px;
+  padding-top: 10px;
 
   margin-left: var(--content-offset);
   margin-right: auto;
@@ -468,7 +267,8 @@ img
   height: auto;
 }
 
-.caption
+.caption,
+.small
 {
   color: var(--muted);
 }
@@ -480,7 +280,167 @@ img
   object-fit: cover;
 }
 
-/* Safety: if you want a hard breakpoint fallback too */
+/* =========================
+   7) Projects (no-scroll viewer)
+   ========================= */
+
+.page-projects
+{
+  overflow: hidden;
+}
+
+.page--projects
+{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content--projects
+{
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.projects-shell
+{
+  flex: 1;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.project-view
+{
+  flex: 1;
+  min-height: 0;
+
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 12px;
+}
+
+.project-title
+{
+  margin: 0;
+  font-size: var(--fs);
+  font-weight: 400;
+}
+
+.project-media
+{
+  min-height: 0;
+  overflow: hidden;
+}
+
+.project-img
+{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.project-text
+{
+  margin: 0;
+  color: var(--muted);
+}
+
+.project-tabs
+{
+  display: flex;
+  align-items: flex-start;
+  gap: var(--nav-gap);
+  white-space: nowrap;
+}
+
+.project-tab
+{
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin-bottom: 20px;
+
+  color: inherit;
+  font: inherit;
+
+  text-transform: lowercase;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+
+.project-tab:hover
+{
+  text-decoration: underline;
+}
+
+.project-tab[aria-current="page"]
+{
+  text-decoration: underline;
+}
+
+/* =========================
+   8) Footer (fixed)
+   ========================= */
+
+.footer
+{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  z-index: 50;
+
+  max-width: var(--body-max);
+  margin-left: auto;
+  margin-right: auto;
+
+  padding-left: var(--page-pad-x);
+  padding-right: var(--page-pad-x);
+  padding-top: 12px;
+
+  border-top: 1px solid var(--rule);
+  background: var(--paper);
+
+  color: var(--muted);
+}
+
+.footer-row
+{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--col-gap);
+}
+
+.footer-left
+{
+  max-width: 520px;
+}
+
+.footer-right
+{
+  display: flex;
+  gap: var(--nav-gap);
+  white-space: nowrap;
+}
+
+.footer-address
+{
+  color: var(--muted);
+}
+
+/* =========================
+   9) Responsive
+   ========================= */
+
 @media (max-width: 1000px)
 {
   .content
@@ -490,65 +450,20 @@ img
   }
 }
 
-/* =========================
-   7) Projects
-   ========================= */
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-}
-
-.card {
-  border-top: 1px solid var(--rule);
-  padding-top: 12px;
-}
-
-.card h3 {
-  margin: 0;
-  font-size: var(--fs);
-  font-weight: 400;
-}
-
-.card p {
-  margin: 6px 0 0 0;
-  color: var(--muted);
-}
-
-.card img {
-  margin-top: 10px;
-}
-
-/* =========================
-   8) Footer
-   ========================= */
-
-.footer {
-  margin-top: 40px;
-  border-top: 1px solid var(--rule);
-  padding-top: 18px;
-  color: var(--muted);
-}
-
-.small {
-  color: var(--muted);
-}
-
-/* =========================
-   9) Responsive
-   ========================= */
-
-@media (max-width: 1000px) {
-  .topbar-nav {
+@media (max-width: 1000px)
+{
+  .topbar-nav
+  {
     display: none;
   }
 
-  .nav-toggle {
+  .nav-toggle
+  {
     display: block;
   }
 
-  .content {
+  .content
+  {
     padding-right: 0;
     margin-left: auto;
     margin-right: auto;
@@ -559,36 +474,31 @@ img
 {
   :root
   {
-    --top-pad: 18px;        /* was 38px */
-    --header-min-h: 7vh;    /* was 10vh */
-    --page-pad-x: 20px;     /* was 64px */
+    --top-pad: 18px;
+    --header-min-h: 7vh;
+    --page-pad-x: 20px;
   }
 
   .page
   {
     padding: 0 var(--page-pad-x) 8vw;
+    padding-bottom: 90px;
   }
 
-  .topbar
+  .footer
   {
-    min-height: var(--header-min-h);
-    padding-top: var(--top-pad);
+    padding-left: var(--page-pad-x);
+    padding-right: var(--page-pad-x);
   }
 
-  .brand
+  .footer-row
   {
-    font-size: 10px;        /* slightly tighter */
-    line-height: 1.6em;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .nav-toggle
   {
     top: var(--top-pad);
-  }
-
-  .content
-  {
-    margin-left: auto;
-    margin-right: auto;
   }
 }
