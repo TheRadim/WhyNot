@@ -2,8 +2,7 @@
    1) Tokens
    ========================= */
 
-:root
-{
+:root {
   --ink: #232323;
   --muted: rgba(35, 35, 35, 0.65);
   --rule: rgba(35, 35, 35, 0.12);
@@ -33,20 +32,17 @@
 
 *,
 *::before,
-*::after
-{
+*::after {
   box-sizing: border-box;
 }
 
 html,
-body
-{
+body {
   margin: 0;
   padding: 0;
 }
 
-body
-{
+body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font);
@@ -54,26 +50,22 @@ body
   line-height: var(--lh);
 }
 
-a
-{
+a {
   color: inherit;
   text-decoration: none;
 }
 
-a:hover
-{
+a:hover {
   text-decoration: underline;
 }
 
-hr
-{
+hr {
   border: 0;
   border-top: 1px solid var(--rule);
   margin: 18px 0;
 }
 
-img
-{
+img {
   max-width: 100%;
   height: auto;
   display: block;
@@ -83,8 +75,7 @@ img
    3) Layout
    ========================= */
 
-.page
-{
+.page {
   max-width: var(--body-max);
   margin: 0 auto;
   padding: 0 var(--page-pad-x) 5vw;
@@ -92,14 +83,34 @@ img
   position: relative;
   min-height: 100vh;
   padding-bottom: 90px;
+  /* reserve space for fixed footer */
+}
+
+.content {
+  max-width: var(--content-max);
+  padding-top: 10px;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.page-title {
+  margin: 0 0 12px 0;
+  font-size: var(--fs);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.caption,
+.small {
+  color: var(--muted);
 }
 
 /* =========================
    4) Header
    ========================= */
 
-.topbar
-{
+.topbar {
   width: 100%;
   max-width: var(--header-max);
   min-height: var(--header-min-h);
@@ -113,8 +124,7 @@ img
   column-gap: var(--col-gap);
 }
 
-.brand
-{
+.brand {
   width: var(--brand-w);
   margin: 0;
 
@@ -122,13 +132,11 @@ img
   text-align: right;
 }
 
-.brand:hover
-{
+.brand:hover {
   text-decoration: none;
 }
 
-.brand-logo
-{
+.brand-logo {
   width: 100%;
   max-width: 100px;
   max-height: 100px;
@@ -136,24 +144,21 @@ img
   margin-left: auto;
 }
 
-/* Let children participate in the grid (so nav-left can be col 2, nav-right col 3) */
-.topbar-nav
-{
+/* Let nav children participate in the grid */
+.topbar-nav {
   display: contents;
   text-transform: lowercase;
   letter-spacing: 0.02em;
 }
 
-.nav-left
-{
+.nav-left {
   grid-column: 2;
   display: flex;
   gap: var(--nav-gap);
   align-items: flex-start;
 }
 
-.nav-right
-{
+.nav-right {
   grid-column: 3;
   display: flex;
   gap: var(--nav-gap);
@@ -161,8 +166,7 @@ img
   align-items: flex-start;
 }
 
-.topbar-nav a[aria-current="page"]
-{
+.topbar-nav a[aria-current="page"] {
   text-decoration: underline;
 }
 
@@ -170,8 +174,7 @@ img
    5) Burger + Overlay
    ========================= */
 
-.nav-toggle
-{
+.nav-toggle {
   display: none;
   position: absolute;
   right: 0;
@@ -184,8 +187,7 @@ img
   padding: 0;
 }
 
-.nav-toggle span
-{
+.nav-toggle span {
   display: block;
   width: 18px;
   height: 1px;
@@ -193,8 +195,7 @@ img
   margin: 5px 0;
 }
 
-.overlay-nav
-{
+.overlay-nav {
   position: fixed;
   inset: 0;
   z-index: 200;
@@ -216,87 +217,76 @@ img
   transition: opacity 0.25s ease;
 }
 
-.overlay-nav.active
-{
+.overlay-nav.active {
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Auto-collapse switch (JS toggles this class) */
-.topbar.is-collapsed .topbar-nav
-{
+.topbar.is-collapsed .topbar-nav {
   display: none;
 }
 
-.topbar.is-collapsed .nav-toggle
-{
+.topbar.is-collapsed .nav-toggle {
   display: block;
 }
 
 /* =========================
-   6) Index
+   6) Index / generic media
    ========================= */
 
-.content
-{
-  max-width: var(--content-max);
-  padding-top: 10px;
-
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.page-title
-{
-  margin: 0 0 12px 0;
-  font-size: var(--fs);
-  font-weight: 400;
-  letter-spacing: 0.02em;
-}
-
-.hero
-{
+.hero {
   display: grid;
   gap: 18px;
+  justify-content: center;
 }
 
-.hero img
-{
+.hero img {
   width: 100%;
   height: auto;
+  max-width: 50vw;
 }
 
-.caption,
-.small
-{
-  color: var(--muted);
-}
-
-.media img
-{
+.media img {
   width: 100%;
   max-height: 560px;
   object-fit: cover;
 }
 
 /* =========================
+   Hero Slideshow
+   ========================= */
+
+.hero {
+  position: relative;
+}
+
+.hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+
+  transition: opacity 1.2s ease;
+}
+
+.hero-img.is-fading {
+  opacity: 0;
+}
+
+/* =========================
    7) Projects (no-scroll viewer)
    ========================= */
 
-.page-projects
-{
+.page-projects {
   overflow: hidden;
 }
 
-.page--projects
-{
+.page--projects {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-.content--projects
-{
+.content--projects {
   flex: 1;
   min-height: 0;
   overflow: hidden;
@@ -305,22 +295,20 @@ img
   flex-direction: column;
 }
 
-.projects-shell
-{
+.projects-shell {
   flex: 1;
   min-height: 0;
 
   display: flex;
   flex-direction: column;
 
-  position: relative; /* needed for pseudo-element */
-  margin-top: 16px;   /* space between tabs and line */
-  padding-top: 16px;  /* space between line and project */
+  position: relative;
+  margin-top: 16px;
+  padding-top: 16px;
 }
 
 /* Thin separator line */
-.projects-shell::before
-{
+.projects-shell::before {
   content: "";
   position: absolute;
   top: 0;
@@ -331,11 +319,7 @@ img
   background: var(--rule);
 }
 
-/* Make the viewer itself a flex column.
-   Top: title + text (natural height)
-   Bottom: media (fills remaining space and centers its content) */
-.project-view
-{
+.project-view {
   flex: 1;
   min-height: 0;
 
@@ -344,46 +328,20 @@ img
   gap: 12px;
 }
 
-.project-title
-{
+.project-title {
   margin: 0;
   font-size: var(--fs);
   font-weight: 400;
 }
 
-.project-text
-{
+.project-text {
   margin: 0;
   color: var(--muted);
   max-width: 72ch;
 }
 
-/* This is the key: media takes the leftover height */
-.project-media
-{
-  flex: 1;
-  min-height: 0;
-
-  display: flex;
-  align-items: center;      /* vertical centering */
-  justify-content: center;  /* horizontal centering */
-
-  overflow: hidden;
-}
-
-/* Image can be smaller than container; we contain it and keep it centered */
-.project-img
-{
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-}
-
 /* Tabs */
-.project-tabs
-{
+.project-tabs {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -391,8 +349,7 @@ img
   margin-bottom: 14px;
 }
 
-.project-tab
-{
+.project-tab {
   appearance: none;
   background: transparent;
   border: 0;
@@ -406,26 +363,100 @@ img
   cursor: pointer;
 }
 
-.project-tab:hover
-{
+.project-tab:hover {
   text-decoration: underline;
 }
 
-.project-tab[aria-current="page"]
-{
+.project-tab[aria-current="page"] {
   text-decoration: underline;
+}
+
+/* Gallery: main image + strip */
+.project-media {
+  flex: 1;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+
+  overflow: hidden;
+}
+
+.project-media-main {
+  flex: 1;
+  min-height: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+/* Main image (single source of truth) */
+.project-img {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  padding: 0 10em 0 10em;
+}
+
+/* Strip */
+.project-strip {
+  flex: 0 0 auto;
+
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+
+  padding-bottom: 2px;
+}
+
+.project-thumb {
+  width: 20px;
+  height: 20px;
+
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.project-thumb img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  opacity: 0.75;
+}
+
+.project-thumb:hover img {
+  opacity: 1;
+}
+
+.project-thumb[aria-current="true"] img {
+  opacity: 1;
+  outline: 1px solid var(--rule);
+  outline-offset: 2px;
 }
 
 /* =========================
    8) Footer (fixed)
    ========================= */
 
-.footer
-{
+.footer {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 10px;
+  bottom: 0;
+  padding-bottom: 7px;
   z-index: 50;
 
   max-width: var(--body-max);
@@ -434,7 +465,7 @@ img
 
   padding-left: var(--page-pad-x);
   padding-right: var(--page-pad-x);
-  padding-top: 12px;
+  padding-top: 7px;
 
   border-top: 1px solid var(--rule);
   background: var(--paper);
@@ -442,28 +473,24 @@ img
   color: var(--muted);
 }
 
-.footer-row
-{
+.footer-row {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: var(--col-gap);
 }
 
-.footer-left
-{
+.footer-left {
   max-width: 520px;
 }
 
-.footer-right
-{
+.footer-right {
   display: flex;
   gap: var(--nav-gap);
   white-space: nowrap;
 }
 
-.footer-address
-{
+.footer-address {
   color: var(--muted);
 }
 
@@ -471,52 +498,38 @@ img
    9) Responsive
    ========================= */
 
-@media (max-width: 1000px)
-{
-  .content
-  {
+@media (max-width: 1000px) {
+  .content {
     margin-left: auto;
     margin-right: auto;
   }
-}
 
-@media (max-width: 1000px)
-{
-  .topbar-nav
-  {
+  .topbar-nav {
     display: none;
   }
 
-  .nav-toggle
-  {
+  .nav-toggle {
     display: block;
   }
 
-  .content
-  {
+  .content {
     padding-right: 0;
-    margin-left: auto;
-    margin-right: auto;
   }
 }
 
-@media (max-width: 768px)
-{
-  :root
-  {
+@media (max-width: 768px) {
+  :root {
     --top-pad: 18px;
     --header-min-h: 7vh;
     --page-pad-x: 20px;
   }
 
-  .page
-  {
+  .page {
     padding: 0 var(--page-pad-x) 8vw;
     padding-bottom: 90px;
   }
 
-  .footer
-  {
+  .footer {
     padding-left: var(--page-pad-x);
     padding-right: var(--page-pad-x);
     padding-top: 6px;
@@ -525,27 +538,38 @@ img
     line-height: 0.4em;
   }
 
-    .footer-row
-  {
+  .footer-row {
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 6px;
   }
 
-  .footer-left
-  {
+  .footer-left {
     max-width: 100%;
   }
 
-  .footer-address
-  {
+  .footer-address {
     line-height: 1.4em;
   }
 
-  .footer-right
-  {
+  .footer-right {
     justify-content: center;
     gap: 18px;
   }
+
+  /* Main image (single source of truth) */
+  .project-img {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+    padding: 0 0em 0 0em;
+  }
+
+  .hero img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
 }
