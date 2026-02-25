@@ -11,29 +11,20 @@
 
   --body-max: 1600px;
   --header-max: 1600px;
-  --content-max: 1000px;
+  --content-max: 1250px;
 
   --brand-w: 100px;
-  --nav-right-gap-max: 100px;
 
   --page-pad-x: 64px;
   --top-pad: 38px;
   --header-min-h: 10vh;
 
-  --nav-gap: 28px;
-  --col-gap: 22px;
+  --nav-gap: 30px;
+  --col-gap: 10px;
 
   --font: "Open Sans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   --fs: 11px;
   --lh: 2.0em;
-
-  --canvas-w: min(100vw, var(--header-max));
-  --inner-w: calc(var(--canvas-w) - (var(--page-pad-x) * 2));
-  --nav-right-gap: clamp(
-    0px,
-    calc(var(--inner-w) - var(--brand-w) - var(--content-max) - var(--col-gap)),
-    var(--nav-right-gap-max)
-  );
 }
 
 /* =========================
@@ -117,7 +108,7 @@ img
   z-index: 10;
 
   display: grid;
-  grid-template-columns: var(--brand-w) minmax(0, var(--content-max)) var(--nav-right-gap);
+  grid-template-columns: var(--brand-w) 1fr auto;
   align-items: start;
   column-gap: var(--col-gap);
 }
@@ -145,24 +136,29 @@ img
   margin-left: auto;
 }
 
+/* Let children participate in the grid (so nav-left can be col 2, nav-right col 3) */
 .topbar-nav
 {
-  grid-column: 2;
-
-  width: 100%;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-
+  display: contents;
   text-transform: lowercase;
   letter-spacing: 0.02em;
 }
 
-.nav-left,
-.nav-right
+.nav-left
 {
+  grid-column: 2;
   display: flex;
   gap: var(--nav-gap);
+  align-items: flex-start;
+}
+
+.nav-right
+{
+  grid-column: 3;
+  display: flex;
+  gap: var(--nav-gap);
+  justify-content: flex-end;
+  align-items: flex-start;
 }
 
 .topbar-nav a[aria-current="page"]
@@ -201,7 +197,7 @@ img
 {
   position: fixed;
   inset: 0;
-  z-index: 200; /* <<< add this */
+  z-index: 200;
 
   background: var(--paper);
 
@@ -226,6 +222,7 @@ img
   pointer-events: auto;
 }
 
+/* Auto-collapse switch (JS toggles this class) */
 .topbar.is-collapsed .topbar-nav
 {
   display: none;
