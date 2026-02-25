@@ -2,22 +2,6 @@
 {
   "use strict";
 
-  const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();
-
-  document.querySelectorAll("[data-nav] a").forEach((a) =>
-  {
-    const href = (a.getAttribute("href") || "").toLowerCase();
-
-    if (href && href === path)
-    {
-      a.setAttribute("aria-current", "page");
-    }
-    else
-    {
-      a.removeAttribute("aria-current");
-    }
-  });
-
   const topbar = document.querySelector(".topbar");
   const navToggle = document.querySelector(".nav-toggle");
   const navOverlay = document.querySelector(".overlay-nav");
